@@ -1,0 +1,80 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css);
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+body {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  padding: 30px;
+}
+
+main {
+  max-width: 480px;
+  width: 100%;
+}
+
+.score {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.score__item {
+  font-size: 30px;
+}
+.score__item.circle {
+  color: #6bcddf;
+}
+.score__item.cross {
+  color: #3787d4;
+}
+.score__item.draw {
+  color: #929292;
+}
+.score__icon {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.score__icon i {
+  font-size: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 30px;
+}
+.grid div {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.grid div:nth-child(3n+0) {
+  border-right: 0;
+}
+.grid div:nth-last-child(-n+3) {
+  border-bottom: 0;
+}
+.grid button {
+  width: 160px;
+  height: 160px;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+}
+.grid button i {
+  font-size: 72px;
+}
+.grid button:disabled {
+  cursor: not-allowed;
+}
+.grid button .fa-circle {
+  color: #6bcddf;
+}
+.grid button .fa-xmark {
+  color: #3787d4;
+}
+.grid button .fa-scale-balanced {
+  color: #929292;
+}
+
+/*# sourceMappingURL=styles.css.map */
