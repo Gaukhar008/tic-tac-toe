@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <script src="https://kit.fontawesome.com/bf54e516de.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -32,15 +32,23 @@
         </section>
 
         <section class="grid">
-            <div><button tabindex="-1"><i class="fa-regular fa-circle"></i></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
-            <div><button tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-0" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-1" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-2" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-3" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-4" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-5" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-6" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-7" tabindex="-1"></button></div>
+            <div><button class="grid__box grid__box-8" tabindex="-1"></button></div>
+        </section>
+
+        <section class="bottom">
+            <button class="new-game"><i class="fa-solid fa-arrows-rotate"></i></button>
+                <div class="active-user">
+                    <i class="fa-solid fa-xmark"></i>
+                    <i class="fa-regular fa-circle"></i>
+                </div>
         </section>
     </main>
     
