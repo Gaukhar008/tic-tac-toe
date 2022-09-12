@@ -82,3 +82,74 @@ main {
         }
     }
 }
+
+.bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .new-game {
+        border-radius: 100%;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 1px #ddd;
+        color: #fff;
+        background: #a4b5b8;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        transition: background .3s ease-in-out;
+        i {
+            font-size: 24px;
+        }
+        &:hover {
+            background: #7cb5bf;
+        }
+    }
+    .active-user {
+        border: 1px solid #ddd;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px 5px 10px;
+        width: 60px;
+        border-radius: 25px;
+        position: relative;
+        i {
+            font-size: 24px;
+            position: relative;
+            z-index: 2;
+            transition: color .3s ease-in-out;
+        }
+        .fa-circle {
+            font-size: 18px;
+            color: $circleColor;
+        }
+        .fa-xmark {
+            color: #fff;
+        }
+        &.active {
+            .fa-circle {
+                color: #fff ;
+            }
+            .fa-xmark {
+                color: $crossColor;
+            }
+            &::before {
+                left: calc(100% - 36px);
+            }
+        }
+        &::before {
+            content: '';
+            width: 36px;
+            height: 36px;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            background: #39bcd4;
+            border-radius: 50%;
+            transition: left .3s ease-in-out;
+        }
+    }
+}
