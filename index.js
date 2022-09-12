@@ -1,19 +1,30 @@
 const gameBoardModule = (function() {
-    const gameBoard = ['X', 'O', 'X', 'X', 'X'];
+    const gameBoard = ['', '', '', 
+                      '', '', '', 
+                      '', '', ''];
     return {gameBoard};
 })();
 
-const displayController = (function() {
-    const gridBoxes = document.querySelectorAll('.grid__box');
-    
+const displayControllerModule = (function() {
+    const gridBoxes = Array.from(document.querySelectorAll('.grid__box'));
+    let turn = 'X';
 
-    function renderArrayToScreenModule() {
-        for (let i = 0; i < gridBoxes.length; i++) {
+    function renderArrayToScreen() {
+        for (let i = 0; i < gameBoardModule.gameBoard.length; i++) {
             gridBoxes[i].textContent = gameBoardModule.gameBoard[i];
         }
     };
 
-    return {};
+    function handleTurn(event) {
+        let idx = gridBoxes.findIndex(function(box) {
+            return box === event.target;
+        });
+        gameBoardModule.gameBoard[idx] = turn; 
+        renderArrayToScreen();
+    };
+    
+
+    return {renderArrayToScreen, handleTurn};
 })();
 
 const createPlayer = (playerName, playerNumber, assignedXO) => {
@@ -26,4 +37,4 @@ const createPlayer = (playerName, playerNumber, assignedXO) => {
 let Justin = createPlayer('Justin', 1, 'X');
 let James = createPlayer('James', 2, 'O');
 
-
+document.querySelector('.grid').addEventListener('click', displayControllerModule.handleTurn);
