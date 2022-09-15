@@ -1,3 +1,5 @@
+"use strict";
+
 const gameBoardModule = (function() {
     const gameBoard = ['', '', '', 
                       '', '', '', 
@@ -30,24 +32,70 @@ const displayControllerModule = (function() {
         if(gameBoardModule.gameBoard[idx] === '') {
         gameBoardModule.gameBoard[idx] = turn; 
         };
+
+        let win = gameController.getWinner();
         renderArrayToScreen();
+        if(win !== null) {
+            setTimeout(() => {
+            gameController.updateGameBoard()
+            gridBoxes.forEach(box => {
+                box.innerHTML = '';
+            })},
+            500);
+        }
     };
     
 
     return {handleTurn};
 })();
 
-const createPlayer = (playerName, playerNumber, assignedXO) => {
-    const getPlayerName = () => {
-        console.log('This is the name of player ' + playerNumber + '.....' + playerName);
-    }
-    const getPlayerMark = function() {
-        return this.assignedXO;
+const Player = (assignedXO) => {
+    this.assignedXO = assignedXO;
+    const getPlayerAssignedXO = function() {
+        return assignedXO;
     };
-    return {getPlayerName, getPlayerMark, playerName, playerNumber, assignedXO};
+    return {assignedXO};
 }
 
-let Justin = createPlayer('Justin', 1, 'X');
-let James = createPlayer('James', 2, 'O');
+const gameController = (() => {
+    const playerX = 'X';
+    const playerO = 'O';
+    let round = 1;
+
+    const winningCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6], 
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    function getWinner() {
+        let winner = null;
+        winningCombinations.forEach(function(combo) {
+            if(gameBoardModule.gameBoard[combo[0]] && gameBoardModule.gameBoard[combo[0]]  == gameBoardModule.gameBoard[combo[1]] &&
+               gameBoardModule.gameBoard[combo[0]] == gameBoardModule.gameBoard[combo[2]]) {
+               winner = gameBoardModule.gameBoard[combo[0]];  
+            };
+        });
+        if(winner !== null) {
+            round++;
+        }
+        console.log(winner);
+        return winner;
+    };
+
+    function updateGameBoard() {
+        for(let i = 0; i < gameBoardModule.gameBoard.length; i++) {
+            gameBoardModule.gameBoard[i] = '';
+
+        };
+    };
+
+    return {getWinner, updateGameBoard, round};
+})();
 
 document.querySelector('.grid').addEventListener('click', displayControllerModule.handleTurn);
