@@ -9,12 +9,15 @@ body {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    padding: 30px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 main {
     max-width: 480px;
     width: 100%;
+    padding: 30px;
 }
 
 .score {
@@ -59,8 +62,8 @@ main {
         }
     }
     button {
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 140px;
         border: 0; 
         cursor: pointer;
         background: transparent;
@@ -102,7 +105,7 @@ main {
             font-size: 24px;
         }
         &:hover {
-            background: #7cb5bf;
+            background: #3787d4;
         }
     }
     .active-user {
@@ -111,7 +114,7 @@ main {
         flex-flow: row nowrap;
         align-items: center;
         justify-content: space-between;
-        padding: 5px 10px 5px 10px;
+        padding: 5px 9px 5px 10px;
         width: 60px;
         border-radius: 25px;
         position: relative;
