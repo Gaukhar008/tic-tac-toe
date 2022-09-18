@@ -32,9 +32,13 @@ const displayControllerModule = (function() {
         if(gameBoardModule.gameBoard[idx] === '') {
         gameBoardModule.gameBoard[idx] = turn; 
         };
-
-        let win = gameController.getWinner();
         renderArrayToScreen();
+        resetGameBoard();
+        updateStatistics();
+    };
+
+    function resetGameBoard() {
+        let win = gameController.getWinner();
         if(win !== null) {
             setTimeout(() => {
             gameController.updateGameBoard()
@@ -42,25 +46,43 @@ const displayControllerModule = (function() {
                 box.innerHTML = '';
             })},
             500);
+            gameController.round++;
         }
-    };
+    }
+
+    function updateStatistics() {
+        const circleWins = document.querySelector('.score__item.circle').lastElementChild.querySelector('strong');
+        const crossWins = document.querySelector('.score__item.cross').lastElementChild.querySelector('strong');
+        const draws = document.querySelector('.score__item.draw').lastElementChild.querySelector('strong');
+
+        let win = gameController.getWinner();
+        if(win == 'X') {
+            crossWins.textContent = (++gameController.playerX.wins).toString();
+        } else if(win == 'O') {
+            circleWins.textContent = (++gameController.playerO.wins).toString();
+        } else if( win == 'Tie') {
+            draws.textContent = (++gameController.ties).toString();
+        }
+    }
     
 
-    return {handleTurn};
+    return {handleTurn, updateStatistics};
 })();
 
 const Player = (assignedXO) => {
+    let wins = 0;
     this.assignedXO = assignedXO;
     const getPlayerAssignedXO = function() {
         return assignedXO;
     };
-    return {assignedXO};
+    return {getPlayerAssignedXO , wins};
 }
 
 const gameController = (() => {
-    const playerX = 'X';
-    const playerO = 'O';
-    let round = 1;
+    const playerX = Player('X');
+    const playerO = Player('O');
+    let ties = 0;
+    let round = 0;
 
     const winningCombinations = [
         [0, 1, 2],
@@ -81,11 +103,13 @@ const gameController = (() => {
                winner = gameBoardModule.gameBoard[combo[0]];  
             };
         });
-        if(winner !== null) {
-            round++;
+        if(winner) {
+            return winner;
+        } else if(gameBoardModule.gameBoard.includes('')) {
+            return null;
+        } else {
+            return 'Tie';
         }
-        console.log(winner);
-        return winner;
     };
 
     function updateGameBoard() {
@@ -95,7 +119,7 @@ const gameController = (() => {
         };
     };
 
-    return {getWinner, updateGameBoard, round};
+    return {getWinner, updateGameBoard, round, playerX, playerO, ties};
 })();
 
 document.querySelector('.grid').addEventListener('click', displayControllerModule.handleTurn);
